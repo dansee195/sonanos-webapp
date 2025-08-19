@@ -26,7 +26,7 @@ export function Sidebar() {
         <ul className="space-y-1">
           {nav.map((n) => (
             <li key={n.href}>
-              <Link href={n.href} className="group flex items-center gap-3 rounded-xl px-3 py-2 text-text-dim hover:bg-white/5 hover:text-white">
+              <Link href={n.href as any} className="group flex items-center gap-3 rounded-xl px-3 py-2 text-text-dim hover:bg-white/5 hover:text-white">
                 <n.icon className="h-4 w-4 text-text-dim group-hover:text-white" />
                 <span>{n.label}</span>
               </Link>

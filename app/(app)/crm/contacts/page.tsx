@@ -1,5 +1,7 @@
 import { prisma } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ContactsPage() {
   const contacts = await prisma.contact.findMany({ where: { orgId: 'demo-org' }, take: 20, include: { company: true } });
   return (

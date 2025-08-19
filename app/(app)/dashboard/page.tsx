@@ -1,5 +1,7 @@
 import { getSeedKpis } from '@/lib/analytics';
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage() {
   const kpis = await getSeedKpis('demo-org');
   return (

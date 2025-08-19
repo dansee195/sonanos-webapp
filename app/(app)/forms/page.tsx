@@ -1,5 +1,7 @@
 import { prisma } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export default async function FormsPage() {
   const forms = await prisma.form.findMany({ where: { orgId: 'demo-org' }, include: { submissions: true } });
   return (

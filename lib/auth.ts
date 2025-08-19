@@ -1,12 +1,12 @@
-import NextAuth, { type NextAuthConfig } from 'next-auth';
-import { PrismaAdapter } from '@auth/prisma-adapter';
+import type { NextAuthOptions } from 'next-auth';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import EmailProvider from 'next-auth/providers/email';
 import nodemailer from 'nodemailer';
 import { prisma } from './db';
 
 // Email magic link provider with dev-friendly transport
-export const authConfig = {
-	adapter: PrismaAdapter(prisma),
+export const authOptions: NextAuthOptions = {
+	adapter: PrismaAdapter(prisma) as any,
 	session: { strategy: 'jwt' },
 	providers: [
 		EmailProvider({
@@ -29,11 +29,9 @@ export const authConfig = {
 		}),
 	],
 	callbacks: {
-		session: async ({ session, user }) => {
-			if (session.user && user) (session.user as any).id = (user as any).id;
+		session: async ({ session, token }) => {
+			if (session.user && token?.sub) (session.user as any).id = token.sub;
 			return session;
 		},
 	},
-} satisfies NextAuthConfig;
-
-export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth(authConfig);
+};

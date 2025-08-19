@@ -7,7 +7,7 @@ export function Header() {
         <Link href="/dashboard" className="text-white font-semibold">Sonanos</Link>
         <nav className="flex items-center gap-3">
           <Link href="/settings" className="text-text-dim hover:text-white">Einstellungen</Link>
-          <Link href="/support" className="text-text-dim hover:text-white">Support</Link>
+          <Link href="/dashboard" className="text-text-dim hover:text-white">Support</Link>
         </nav>
       </div>
     </header>
