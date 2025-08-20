@@ -11,6 +11,8 @@ RUN npm ci --legacy-peer-deps
 FROM deps AS builder
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+# Ensure public directory exists even if repo doesn't contain one
+RUN mkdir -p public
 RUN npm run prisma:generate || npx prisma generate
 RUN npm run build
 
