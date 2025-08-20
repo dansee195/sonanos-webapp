@@ -31,6 +31,9 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 
+# Ensure required runtime libs exist for Prisma engines
+RUN apk add --no-cache libc6-compat
+
 USER nextjs
 
 CMD ["node", "server.js"]
